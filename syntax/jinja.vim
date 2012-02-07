@@ -56,6 +56,9 @@ syn region jinjaNested matchgroup=jinjaOperator start="(" end=")" transparent di
 syn region jinjaNested matchgroup=jinjaOperator start="\[" end="\]" transparent display containedin=jinjaVarBlock,jinjaTagBlock,jinjaNested contained
 syn region jinjaNested matchgroup=jinjaOperator start="{" end="}" transparent display containedin=jinjaVarBlock,jinjaTagBlock,jinjaNested contained
 syn region jinjaTagBlock matchgroup=jinjaTagDelim start=/{%-\?/ end=/-\?%}/ skipwhite containedin=ALLBUT,jinjaTagBlock,jinjaVarBlock,jinjaRaw,jinjaString,jinjaNested,jinjaComment
+if exists("b:jinja_line_statement_prefix")
+  exec "syn region jinjaTagBlock matchgroup=jinjaTagDelim start=/^\s*" . b:jinja_line_statement_prefix . " / end=/$/ skipwhite containedin=ALLBUT,jinjaTagBlock,jinjaVarBlock,jinjaRaw,jinjaString,jinjaNested,jinjaComment"
+endif
 
 syn region jinjaVarBlock matchgroup=jinjaVarDelim start=/{{-\?/ end=/-\?}}/ containedin=ALLBUT,jinjaTagBlock,jinjaVarBlock,jinjaRaw,jinjaString,jinjaNested,jinjaComment
 
@@ -64,6 +67,9 @@ syn region jinjaRaw matchgroup=jinjaRawDelim start="{%\s*raw\s*%}" end="{%\s*end
 
 " Jinja comments
 syn region jinjaComment matchgroup=jinjaCommentDelim start="{#" end="#}" containedin=ALLBUT,jinjaTagBlock,jinjaVarBlock,jinjaString
+if exists("b:jinja_line_comment_prefix")
+  exec "syn region jinjaLineComment matchgroup=jinjaCommentDelim start=/^\s*" . b:jinja_line_comment_prefix . "/ end=/$/ containedin=ALLBUT,jinjaTagBlock,jinjaVarBlock,jinjaString"
+endif
 
 " Block start keywords.  A bit tricker.  We only highlight at the start of a
 " tag block and only if the name is not followed by a comma or equals sign
