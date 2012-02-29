@@ -75,6 +75,9 @@ endif
 " tag block and only if the name is not followed by a comma or equals sign
 " which usually means that we have to deal with an assignment.
 syn match jinjaStatement containedin=jinjaTagBlock contained skipwhite /\({%-\?\s*\)\@<=\<[a-zA-Z_][a-zA-Z0-9_]*\>\(\s*[,=]\)\@!/
+if exists("b:jinja_line_statement_prefix")
+  exec 'syn match jinjaStatement containedin=jinjaTagBlock contained skipwhite /\(' . b:jinja_line_statement_prefix . '\s*\)\@<=\<[a-zA-Z_][a-zA-Z0-9_]*\>\(\s*[,=]\)\@!/'
+endif
 
 " and context modifiers
 syn match jinjaStatement containedin=jinjaTagBlock contained /\<with\(out\)\?\s\+context\>/ skipwhite
