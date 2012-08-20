@@ -1,0 +1,8 @@
+{
+  "name" : "vim-jinja2",
+  "description" : "Adds Jinja2 support to Vim, including syntax and snipMate snippets",
+  "version" : "0.1",
+  "author" : "Armin Ronacher <>, Franciso Souza <f@souza.cc>",
+  "maintainer" : "F. Gabriel Gosselin <gabriel@evidens.ca>",
+  "repository" : {"type": "git", "url": "git://github.com/beyondwords/vim-jinja2.git"},
+}
